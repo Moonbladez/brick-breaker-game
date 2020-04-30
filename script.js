@@ -152,11 +152,34 @@ const moveBall = () => {
                     //bounce it off brick
                     ball.dy *= -1;
                     brick.visable = false;
+
+                    increaseScore();
                 }
             }
         })
     })
 
+    if (ball.y + ball.size > canvas.height) {
+        showAllBricks()
+        score = 0;
+    }
+
+}
+
+//increase score
+const increaseScore = () => {
+    score++;
+
+    if (score & (brickRowCount * brickRowCount) === 0) {
+        showAllBricks()
+    }
+}
+
+//show all bricks on reset
+const showAllBricks = () => {
+    bricks.forEach(column => {
+        column.forEach(brick => brick.visable = true)
+    })
 }
 
 
@@ -174,7 +197,6 @@ const drawEverything = () => {
 //update canvas
 const update = () => {
     movePaddle()
-    //draw elements
     drawEverything()
     moveBall()
 
