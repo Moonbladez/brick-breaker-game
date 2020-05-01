@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
+@font-face {
+    font-family: "Pixel";
+    src: url(./fonts/Minecraft.ttf);
+}
+
+@font-face {
+    font-family: "Arkanoid";
+    src: url(./fonts/ArkanoidSolid-pgPv.ttf);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -19,6 +29,8 @@ body {
 h1 {
     font-size: 45px;
     color: red;
+    font-family: Arkanoid;
+    letter-spacing: 10px;
 
 }
 

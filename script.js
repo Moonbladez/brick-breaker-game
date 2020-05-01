@@ -2,11 +2,13 @@
 const rulesButton = document.querySelector(".rules-btn")
 const closeButton = document.querySelector(".close-btn")
 const rules = document.querySelector(".rules")
+const header = document.querySelector(".header")
 
 const canvas = document.querySelector("#canvas")
 const ctx = canvas.getContext("2d")
 
 let score = 0;
+let lives = 3;
 
 const brickRowCount = 9;
 const brickColCount = 5;
@@ -80,11 +82,17 @@ const drawPaddle = () => {
 
 //draw score on canvas
 const drawScore = () => {
-    ctx.font = "30px Arial";
+    ctx.font = "20px Pixel";
     ctx.fillStyle = "#fefefe";
-    ctx.fillText(`Score: ${score}`, canvas.width - 150, 40);
+    ctx.fillText(`Score: ${score}`, canvas.width - 120, 40);
 }
 
+//draw lives
+const drawLives = () => {
+    ctx.font = "20px Pixel"
+    ctx.fillStyle = "#fefefe";
+    ctx.fillText(`Lives: ${lives}`, canvas.width - 750, 40);
+}
 
 //draw bricks on canvas
 const drawBricks = () => {
@@ -159,9 +167,14 @@ const moveBall = () => {
         })
     })
 
+    //if ball hits the bottom and not bat
     if (ball.y + ball.size > canvas.height) {
-        showAllBricks()
+        lives = lives - 1;
         score = 0;
+    }
+
+    if (lives === 0) {
+        gameOver()
     }
 
 }
@@ -182,6 +195,11 @@ const showAllBricks = () => {
     })
 }
 
+//game Over 
+const gameOver = () => {
+    canvas.style.display = "none"
+    header.innerText = "Game Over"
+}
 
 
 
@@ -190,6 +208,7 @@ const drawEverything = () => {
     drawBall()
     drawPaddle()
     drawScore()
+    drawLives()
     drawBricks()
 }
 
